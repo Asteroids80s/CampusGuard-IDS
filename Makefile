@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Isr c
+CFLAGS = -Wall -Wextra -Isrc
 SRC = src/ids_sniffer.c src/detection.c src/logger.c
 BIN = campusguard
 
