@@ -1,0 +1,44 @@
+name: CampusGuard CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc make python3
+
+      - name: Build CampusGuard
+        run: make all
+
+      - name: Create log directory
+        run: mkdir -p artifacts/release
+
+      - name: Run happy path test
+        run: bash tests/test_happy.sh
+
+      - name: Run negative test
+        run: bash tests/test_negative.sh
+
+      - name: Run edge case 1
+        run: bash tests/test_edge1.sh
+
+      - name: Run edge case 2
+        run: bash tests/test_edge2.sh
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: campusguard-artifacts
+          path: artifacts/release/

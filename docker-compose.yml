@@ -1,0 +1,49 @@
+version: '3.8'
+
+networks:
+  campus_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+
+services:
+  ids:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: campusguard_ids
+    networks:
+      campus_net:
+        ipv4_address: 192.168.1.100
+    volumes:
+      - ./artifacts/release:/var/log/campusguard
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - sensor_a
+      - sensor_b
+
+  sensor_a:
+    image: alpine:3.18
+    container_name: sensor_a
+    networks:
+      campus_net:
+        ipv4_address: 192.168.1.10
+    command: sh -c "while true; do echo 'STATUS:OK temp=72 humidity=45' | nc -u 192.168.1.100 54000; sleep 2; done"
+
+  sensor_b:
+    image: alpine:3.18
+    container_name: sensor_b
+    networks:
+      campus_net:
+        ipv4_address: 192.168.1.11
+    command: sh -c "while true; do echo 'STATUS:OK temp=68 humidity=50' | nc -u 192.168.1.100 54000; sleep 3; done"
+
+  attacker:
+    image: alpine:3.18
+    container_name: attacker_sim
+    networks:
+      campus_net:
+        ipv4_address: 192.168.1.99
+    command: sh -c "sleep 10 && python3 /app/tests/test_attack.sh"
