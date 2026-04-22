@@ -1,0 +1,6 @@
+[2026-04-22 18:48:57] ALERT | src=192.168.1.100 | len=2000 | reason=OVERSIZED_PAYLOAD: 2000 bytes exceeds limit of 1024
+[2026-04-22 18:48:58] ALERT | src=192.168.1.100 | len=510 | reason=SUSPICIOUS_PATTERN: payload contains known malicious string
+[2026-04-22 18:48:59] ALERT | src=192.168.1.100 | len=517 | reason=SUSPICIOUS_PATTERN: payload contains known malicious string
+[2026-04-22 18:53:58] ALERT | src=192.168.1.100 | len=2000 | reason=OVERSIZED_PAYLOAD: 2000 bytes exceeds limit of 1024
+[2026-04-22 18:53:59] ALERT | src=192.168.1.100 | len=510 | reason=SUSPICIOUS_PATTERN: payload contains known malicious string
+[2026-04-22 18:54:00] ALERT | src=192.168.1.100 | len=517 | reason=SUSPICIOUS_PATTERN: payload contains known malicious string

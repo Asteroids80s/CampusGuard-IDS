@@ -1,0 +1,12 @@
+{
+  "total_packets": 50,
+  "alerts_triggered": 3,
+  "clean_packets": 47,
+  "detection_rate": "100%",
+  "false_positive_rate": "0%",
+  "rules": {
+    "oversized_payload": 1,
+    "suspicious_pattern": 2,
+    "unauthorized_source": 0
+  }
+}
