@@ -35,3 +35,8 @@ test:
 
 clean:
 	rm -f $(BIN)
+	docker-compose down --remove-orphans 2>/dev/null || true
+	rm -f artifacts/release/ids_alerts.log
+	rm -f artifacts/release/campusguard_demo.pcap
+	rm -f artifacts/release/metrics.json
+	@echo "[CampusGuard] Clean complete."
